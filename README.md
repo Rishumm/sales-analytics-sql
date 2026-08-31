@@ -64,10 +64,9 @@ This segmentation helps identify high-value customers, established regular custo
 sales-analytics-sql/
 
 data/
-   gold.fact_sales
-   gold.dim_customers
-   gold.dim_products
-
+   gold.fact_sales.csv
+   gold.dim_customers.csv
+   gold.dim_products.csv
 
  sql/
      00_create_views.sql
