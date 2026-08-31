@@ -37,6 +37,18 @@ The project answers questions related to:
 - Repeat purchase behavior
 - Product profitability
 
+## Customer Report Segmentation
+
+The Customer Report segments customers based on their total spending and relationship duration with the company.
+
+Customer Segment  Criteria -
+
+VIP - Total spending > 5,000 and lifespan ≥ 12 months 
+Regular - Total spending ≤ 5,000 and lifespan ≥ 12 months 
+New - Customers who do not meet the above conditions 
+
+This segmentation helps identify high-value customers, established regular customers, and newer customers based on their spending and relationship with the company.
+
 ## Key Insights
 
 - Bikes generated the majority of total revenue, contributing approximately **96.46%**.
@@ -50,24 +62,27 @@ The project answers questions related to:
 
 
 sales-analytics-sql/
-│
-├── README.md
-│
-├── data/
-│   └── YOUR_DATASET_FILENAME.csv
-│
-└── sql/
-    ├── 00_create_views.sql
-    ├── 01_overall_business_performance.sql
-    ├── 02_yearly_revenue_yoy.sql
-    ├── 03_monthly_revenue_mom.sql
-    ├── 04_category_performance.sql
-    ├── 05_product_performance.sql
-    ├── 06_customer_performance.sql
-    ├── 07_customer_recency_relationship.sql
-    ├── 08_average_monthly_customer_spend.sql
-    ├── 09_rfm_customer_segmentation.sql
-    ├── 10_customer_segment_performance.sql
-    ├── 11_customer_revenue_concentration.sql
-    ├── 12_customer_repeat_purchase_behavior.sql
-    └── 13_product_profitability.sql
+
+data/
+   YOUR_DATASET_FILENAME.csv
+
+ sql/
+     00_create_views.sql
+     01_overall_business_performance.sql
+     02_yearly_revenue_yoy.sql
+     03_monthly_revenue_mom.sql
+     04_category_performance.sql
+     05_product_performance.sql
+     06_customer_performance.sql
+     07_customer_recency_relationship.sql
+    08_average_monthly_customer_spend.sql
+    09_rfm_customer_segmentation.sql
+    10_customer_segment_performance.sql
+    11_customer_revenue_concentration.sql
+    12_customer_repeat_purchase_behavior.sql
+    13_product_profitability.sql
+    14_customer_report_analysis.sql
+    15_product_report.sql
+
+
+README.md
