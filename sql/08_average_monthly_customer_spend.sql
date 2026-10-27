@@ -8,6 +8,8 @@
 
 WITH customer_summary AS (
     SELECT
+        customer_key ,
+       
         customer_name,
 
         SUM(sales_amount) AS total_revenue,
@@ -18,13 +20,14 @@ WITH customer_summary AS (
 
     FROM vw_base_sales
 
-    WHERE customer_name IS NOT NULL
+    WHERE customer_key IS NOT NULL
       AND order_date IS NOT NULL
 
-    GROUP BY customer_name
+    GROUP BY customer_key ,customer_name
 )
 
 SELECT
+    customer_key,
     customer_name,
     total_revenue,
     first_order_date,
@@ -71,4 +74,4 @@ SELECT
 
 FROM customer_summary
 
-ORDER BY average_monthly_spend DESC;
+ORDER BY average_monthly_spend DESC NULLS LAST;
