@@ -8,6 +8,7 @@
 
 WITH customer_dates AS (
     SELECT
+        customer_key,
         customer_name,
 
         MIN(order_date) AS first_order_date,
@@ -19,7 +20,7 @@ WITH customer_dates AS (
     WHERE customer_name IS NOT NULL
       AND order_date IS NOT NULL
 
-    GROUP BY customer_name
+    GROUP BY customer_key , customer_name
 ),
 
 latest_date AS (
@@ -32,6 +33,7 @@ latest_date AS (
 )
 
 SELECT
+    cd.customer_key,
     cd.customer_name,
     cd.first_order_date,
     cd.last_order_date,
