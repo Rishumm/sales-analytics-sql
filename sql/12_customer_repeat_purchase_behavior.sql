@@ -9,15 +9,15 @@
 
 WITH customer_orders AS (
     SELECT
-        customer_name,
+        customer_key,
 
         COUNT(DISTINCT order_number) AS total_orders
 
     FROM vw_base_sales
 
-    WHERE customer_name IS NOT NULL
+    WHERE customer_key IS NOT NULL
 
-    GROUP BY customer_name
+    GROUP BY customer_key
 )
 
 SELECT
