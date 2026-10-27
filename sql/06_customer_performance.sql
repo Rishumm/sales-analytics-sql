@@ -11,6 +11,7 @@
 
 WITH customer_summary AS (
     SELECT
+        customer_key,
         customer_name,
 
         SUM(sales_amount) AS total_revenue,
@@ -27,7 +28,7 @@ WITH customer_summary AS (
 
     WHERE customer_name IS NOT NULL
 
-    GROUP BY customer_name
+    GROUP BY customer_key, customer_name
 ),
 
 customer_ranks AS (
