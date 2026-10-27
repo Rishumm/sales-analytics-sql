@@ -23,6 +23,7 @@ Highlights:
 
 
 --1.Gathers essential fields such as product name, category,subcategory, and cost.
+DROP VIEW IF EXISTS products_report;
 CREATE VIEW products_report AS
 WITH base_query AS (SELECT 
 fs.order_number, 
@@ -58,7 +59,7 @@ product_aggreations AS (
 		 SUM(quantity) AS total_quantity,
 		 COUNT(DISTINCT customer_key) AS total_customers,
 		 MAX(order_date)AS last_order_date,
-     	 ROUND(AVG(sales_amount/ NULLIF (quantity,0)),2) AS avg_selling_price,
+     	 ROUND(AVG(sales_amount :: numeric / NULLIF (quantity,0)),2) AS avg_selling_price,
 		  (
 		        EXTRACT(
 		            YEAR FROM AGE(
@@ -118,5 +119,5 @@ product_aggreations AS (
     /*=====================
      average monthly revenue
      =====================*/
-	  ROUND(total_sales/NULLIF(lifespan_months ,0),2) AS avg_monthly_revenue
+	  ROUND(total_sales :: numeric /NULLIF(lifespan_months ,0),2) AS avg_monthly_revenue
 FROM  product_aggreations
