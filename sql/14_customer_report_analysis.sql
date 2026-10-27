@@ -22,7 +22,7 @@ This reports consolidates key customers metrics & behaviors
 	 -average monthly spend
 =======================================================================
 */
-
+DROP VIEW IF EXISTS customer_report;
 CREATE VIEW customer_report AS 
 WITH base_query AS (
 /*---------------------------------------------------------------------
@@ -69,7 +69,7 @@ SELECT
    --2-Segment customers into categories(VIP, Regular, New) and age groups.
 CASE WHEN total_sales >5000 AND Lifespan>=12 THEN 'VIP'
 	 WHEN total_sales <=5000 AND Lifespan>=12 THEN 'Regular'	 	  
-	 ELSE  'NEW'
+	 ELSE  'New'
 	 END  AS Customer_segment,
 CASE  WHEN age IS NULL THEN 'Unknown'
 	  WHEN age<20 then 	'under 20'
@@ -80,9 +80,9 @@ CASE  WHEN age IS NULL THEN 'Unknown'
 	  END AS age_group,
 	  last_order_date,
 	 
-    (EXTRACT(year FROM age(date_trunc('month', current_date), date_trunc('month',  last_order_date ))) * 12) +
-     EXTRACT(month FROM age(date_trunc('month', current_date), date_trunc('month', last_order_date )))
-	 AS months_since_last_year,
+    (EXTRACT(YEAR FROM AGE(date_trunc('month', (SELECT MAX(order_date) FROM base_query)), date_trunc('month', last_order_date))) * 12)
++ EXTRACT(MONTH FROM AGE(date_trunc('month', (SELECT MAX(order_date) FROM base_query)), date_trunc('month', last_order_date)))
+AS months_since_last_order,
 
 	 total_orders,
 	 total_sales,
