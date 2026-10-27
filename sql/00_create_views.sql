@@ -144,10 +144,10 @@ WITH customer_metrics AS (
 
     FROM vw_base_sales
 
-    WHERE customer_name IS NOT NULL
+    WHERE customer_key IS NOT NULL
       AND order_date IS NOT NULL
 
-    GROUP BY customer_name
+    GROUP BY customer_key, customer_name
 ),
 
 latest_date AS (
@@ -212,21 +212,12 @@ customer_spend AS (
         *,
 
         ROUND(
-            total_revenue
+            total_revenue ::numeric
             / NULLIF(lifespan_months, 0),
             2
         ) AS average_monthly_spend
 
     FROM customer_rfm
-),
-
-valid_customers AS (
-
-    SELECT *
-
-    FROM customer_spend
-
-    WHERE recency_months IS NOT NULL
 ),
 
 rfm_scores AS (
@@ -273,6 +264,7 @@ rfm_total AS (
 )
 
 SELECT
+   customer_key,
     customer_name,
     total_revenue,
     total_orders,
