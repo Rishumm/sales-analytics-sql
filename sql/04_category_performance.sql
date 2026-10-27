@@ -24,7 +24,7 @@ SELECT
     ) AS revenue_percentage,
 
     ROUND(
-        SUM(sales_amount)
+        SUM(sales_amount) :: numeric
         / NULLIF(SUM(quantity), 0),
         2
     ) AS revenue_per_unit,
