@@ -33,7 +33,7 @@ SELECT
     total_units_sold,
 
     ROUND(
-        total_revenue
+        total_revenue :: numeric
         / NULLIF(total_units_sold, 0),
         2
     ) AS revenue_per_unit,
