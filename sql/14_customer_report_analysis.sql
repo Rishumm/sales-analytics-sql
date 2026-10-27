@@ -71,11 +71,12 @@ CASE WHEN total_sales >5000 AND Lifespan>=12 THEN 'VIP'
 	 WHEN total_sales <=5000 AND Lifespan>=12 THEN 'Regular'	 	  
 	 ELSE  'NEW'
 	 END  AS Customer_segment,
-CASE WHEN age<20 then 	'under 20'
+CASE  WHEN age IS NULL THEN 'Unknown'
+	  WHEN age<20 then 	'under 20'
       WHEN age between 20 and 29 then '20-29'
 	  WHEN age between 30 and 39 then '30-39'
 	  WHEN age between 40 and 49 then '40-49'
-	  ELSE '5O and above'
+	  ELSE '50 and above'
 	  END AS age_group,
 	  last_order_date,
 	 
@@ -90,7 +91,7 @@ CASE WHEN age<20 then 	'under 20'
 	 
 	 lifespan,
 	-- compute average order value(AOV)
-	round(total_sales /NULLIF(total_orders, 0), 2) AS Average_order_value,
+	round(total_sales ::numeric /NULLIF(total_orders, 0), 2) AS Average_order_value,
 	--compute average monthly spend
 	 CASE 
         WHEN lifespan = 0 THEN total_sales
